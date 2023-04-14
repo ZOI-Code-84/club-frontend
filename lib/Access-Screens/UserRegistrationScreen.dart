@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MaterialApp(
-      home: UserRegistrationScreen(),
-    ));
-
 class UserRegistrationScreen extends StatelessWidget {
   const UserRegistrationScreen({Key? key}) : super(key: key);
 
@@ -41,7 +37,6 @@ class UserRegistrationScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.white,
-
                 ),
               ),
               const SizedBox(
@@ -51,9 +46,7 @@ class UserRegistrationScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GestureDetector(
-                    onTap: () {
-
-                    },
+                    onTap: () {},
                     child: Container(
                       height: 100,
                       width: 100,
@@ -72,19 +65,17 @@ class UserRegistrationScreen extends StatelessWidget {
                   ),
                   const Text(
                     'QR code',
-                    style: TextStyle(fontSize: 20,
+                    style: TextStyle(
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
-
                   ),
                   const SizedBox(
                     height: 50,
                   ),
                   GestureDetector(
-                    onTap: () {
-
-                    },
+                    onTap: () {},
                     child: Container(
                       height: 100,
                       width: 100,
@@ -105,11 +96,11 @@ class UserRegistrationScreen extends StatelessWidget {
               ),
               const Text(
                 'Club code',
-                style: TextStyle(fontSize: 20,
+                style: TextStyle(
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
-
               ),
             ],
           ),

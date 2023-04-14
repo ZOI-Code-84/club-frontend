@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MaterialApp(
-  home: RegisterScreen(),
-));
-class RegisterScreen extends StatelessWidget{
-  const RegisterScreen ({ Key? key}): super( key:key);
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Stack(
@@ -14,7 +11,7 @@ class RegisterScreen extends StatelessWidget{
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('assets/background.png'),
+                image: AssetImage('assets/background.png'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -39,7 +36,6 @@ class RegisterScreen extends StatelessWidget{
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.white,
-
                 ),
               ),
               const SizedBox(
@@ -49,9 +45,7 @@ class RegisterScreen extends StatelessWidget{
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GestureDetector(
-                    onTap: () {
-
-                    },
+                    onTap: () {},
                     child: Container(
                       height: 100,
                       width: 100,
@@ -70,19 +64,17 @@ class RegisterScreen extends StatelessWidget{
                   ),
                   const Text(
                     'User',
-                    style: TextStyle(fontSize: 20,
+                    style: TextStyle(
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
-
                   ),
                   const SizedBox(
                     height: 50,
                   ),
                   GestureDetector(
-                    onTap: () {
-
-                    },
+                    onTap: () {},
                     child: Container(
                       height: 100,
                       width: 100,
@@ -103,16 +95,14 @@ class RegisterScreen extends StatelessWidget{
               ),
               const Text(
                 'Club',
-                style: TextStyle(fontSize: 20,
+                style: TextStyle(
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
-
               ),
             ],
           ),
-
-
         ],
       ),
     );
