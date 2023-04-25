@@ -1,16 +1,23 @@
 # clubspace
 
-CS308 Faculty Group Project => Mobile Club management app
+##CS308 Faculty Group Project => Mobile Club management app
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## Project arhitecture -> FOLDER-by-FEATURE 
+# Every folder under the lib directory is a feature in the application 
 
-A few resources to get you started if this is your first Flutter project:
+#Example: 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+    To add a settings feature to our app, the folder structure would be as follows: 
+    >lib
+        >settings
+            settings_screen.dart
+            settings_controllers
+            settings_data
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+    Note: Everything that is affiliated with a specific feature is stored inside the "feature" folder that is being used. 
+    For this example it is "settings" feature folder. 
+    
