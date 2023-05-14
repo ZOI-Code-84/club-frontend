@@ -16,6 +16,7 @@ class CustomDrawer extends StatelessWidget {
         '/page1': (context) => Page1(),
         '/page2': (context) => Page2(),
         '/page3': (context) => Page3(),
+        '/page3': (context) => Page3(),
       },
     );
   }
@@ -81,6 +82,14 @@ class DrawerDesign extends StatelessWidget {
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.pushNamed(context, '/page2');
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.access_time_outlined),
+                title: Text('Club Actions'),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, '/page3');
                 },
               ),
               ListTile(
