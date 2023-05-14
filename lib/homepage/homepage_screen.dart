@@ -1,16 +1,38 @@
 import 'package:flutter/material.dart';
 
+import 'navigation_drawer.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+void main() => runApp(MyHomePage());
 
+class MyHomePage extends StatefulWidget {
   @override
-  State<HomePage> createState() => _HomePageState();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _MyHomePageState extends State<MyHomePage> {
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('My App'),
+        ),
+        drawer: CustomDrawer(),
+        body: Column(
+          children: [
+
+          ],
+        ),
+      ),
+    );
   }
+}
+
+class DrawerItem {
+  final String title;
+  final IconData icon;
+
+  const DrawerItem({required this.title, required this.icon});
 }
