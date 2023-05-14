@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(CustomDrawer());
+void main() => runApp(HomePage());
 
-class CustomDrawer extends StatelessWidget {
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -82,14 +81,6 @@ class DrawerDesign extends StatelessWidget {
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.pushNamed(context, '/page2');
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.access_time_outlined),
-                title: Text('Club Actions'),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/page3');
                 },
               ),
               ListTile(
