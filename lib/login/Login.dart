@@ -14,7 +14,7 @@ class LoginScreen extends StatelessWidget {
     debugPrint('Name: ${data.name}, Password: ${data.password}');
 
     final response = await http.post(
-      Uri.parse('http://192.168.56.1/api/auth/login'),
+      Uri.parse('http://192.168.56.1:8080/api/auth/login'),
       body: jsonEncode(<String, String>{
         "email": data.name,
         "password": data.password
@@ -27,12 +27,17 @@ class LoginScreen extends StatelessWidget {
       },
     );
 
+    print(response.body); // Print the response body instead of the whole response object
+
     if (response.statusCode == 200) {
-      return null;
+      final responseBody = jsonDecode(response.body);
+      final token = responseBody['token'] as String?;
+      return token;
     } else {
       return 'Invalid credentials';
     }
   }
+
 
 
   Future<String?> _signupUser(SignupData data) async {
