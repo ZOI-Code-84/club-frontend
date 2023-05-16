@@ -1,5 +1,4 @@
 import 'package:clubspace/pager/horizontal_pager.dart';
-import 'package:clubspace/post/post_ui.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(HomePage());

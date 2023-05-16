@@ -7,6 +7,8 @@ import 'package:http/http.dart' as http;
 
 void main() => runApp(LoginScreen());
 
+String? authToken;
+
 class LoginScreen extends StatelessWidget {
   Duration get loginTime => Duration(milliseconds: 2250);
 
@@ -27,16 +29,20 @@ class LoginScreen extends StatelessWidget {
       },
     );
 
-    print(response.body); // Print the response body instead of the whole response object
+    print(response.body);
 
     if (response.statusCode == 200) {
       final responseBody = jsonDecode(response.body);
       final token = responseBody['token'] as String?;
-      return token;
+
+      authToken = token;
+
+      return null;
     } else {
       return 'Invalid credentials';
     }
   }
+
 
 
 

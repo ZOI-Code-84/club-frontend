@@ -2,9 +2,9 @@ import 'package:clubspace/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(Splash());
 
-class MyApp extends StatelessWidget {
+class Splash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
