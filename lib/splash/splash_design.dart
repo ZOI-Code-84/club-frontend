@@ -1,8 +1,18 @@
-import 'package:clubspace/homepage/home_page.dart';
+import 'package:clubspace/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-void main() => runApp(SplashScreen());
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: SplashScreen(),
+    );
+  }
+}
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -17,34 +27,29 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _loadSplashAnimation() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 5));
 
-    setState(() {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => HomePage()),
-      );
-    });
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => LoginScreen()),
+    );
   }
-
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: Colors.lightBlueAccent,
-        body: Center(
-          child: Lottie.network(
-            'https://assets5.lottiefiles.com/packages/lf20_sr6nrr2j.json',
-            width: 200,
-            height: 200,
-            repeat: false,
-            fit: BoxFit.contain,
-            onLoaded: (composition) {},
-          ),
+    return Scaffold(
+      backgroundColor: Colors.lightBlueAccent,
+      body: Center(
+        child: Lottie.network(
+          'https://assets5.lottiefiles.com/packages/lf20_sr6nrr2j.json',
+          width: 200,
+          height: 200,
+          repeat: true,
+          fit: BoxFit.contain,
+          onLoaded: (composition) {},
         ),
       ),
     );
   }
 }
+

@@ -41,6 +41,7 @@ dependencies:
   slidable_bar: ^1.1.1
   flutter_easyloading: ^3.0.5
   lottie: ^2.3.2
+  flutter_login: ^4.1.1
 
 dev_dependencies:
   flutter_test:
@@ -65,9 +66,10 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/database.json
+    - assets/logo.png
+    - assets/saturn.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
