@@ -9,7 +9,7 @@ class Demo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color hexColor = Color(0xFFF6BA71);
+    final Color hexColor = Color.fromARGB(255, 2, 2, 1);
     return MaterialApp(
       home: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -38,7 +38,7 @@ class Demo extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: kSpacingUnit * 2,
-                      backgroundImage: AssetImage("assets/logo.png"),
+                      backgroundImage: AssetImage("assets/avatar.jpg"),
                     ),
                     SizedBox(height: 20),
                     Text(
@@ -104,51 +104,145 @@ class Demo extends StatelessWidget {
                 alignment: Alignment.topCenter,
                 child: Column(
                   children: [
-                    TextFormField(
-                      keyboardType: TextInputType.text,
-                      decoration: const InputDecoration(
-                        labelText: 'Email',
-                        hintText: 'Enter your Email',
-                        prefixIcon: Icon(Icons.email_sharp, color: Colors.blue),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue, width: 2),
-                          borderRadius: BorderRadius.all(Radius.circular(40)),
-                        ),
-                        labelStyle: TextStyle(
-                          color: Colors.blue,
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(25)),
-                          borderSide: BorderSide(
-                            color: Colors.blue,
-                            width: 2,
-                          ),
+                    Container(
+                      height: 45,
+                      margin: EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.only(left: 10.0),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.person,
+                              color: Colors.white,
+                              size: 24.0,
+                            ),
+                            SizedBox(width: 10),
+                            Text(
+                              'Player',
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      obscureText: true,
                     ),
-                    SizedBox(height: 20),
-                    TextFormField(
-                      keyboardType: TextInputType.text,
-                      decoration: const InputDecoration(
-                        labelText: 'Password',
-                        hintText: 'Enter your password',
-                        prefixIcon:
-                            Icon(Icons.lock_outlined, color: Colors.blue),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue, width: 2),
-                          borderRadius: BorderRadius.all(Radius.circular(25)),
-                        ),
-                        labelStyle: TextStyle(color: Colors.blue),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(25)),
-                          borderSide: BorderSide(
-                            color: Colors.blue,
-                            width: 2,
-                          ),
+                    Container(
+                      height: 45,
+                      margin: EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.only(left: 10.0),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.people,
+                              color: Colors.white,
+                              size: 24.0,
+                            ),
+                            SizedBox(width: 10),
+                            Text(
+                              'Point Guard',
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      obscureText: true,
+                    ),
+                    Container(
+                      height: 45,
+                      margin: EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.only(left: 10.0),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.mail_outline_outlined,
+                              color: Colors.white,
+                              size: 24.0,
+                            ),
+                            SizedBox(width: 10),
+                            Text(
+                              'dummyData@gmail.com',
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: 45,
+                      margin: EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.only(left: 10.0),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.phone,
+                              color: Colors.white,
+                              size: 24.0,
+                            ),
+                            SizedBox(width: 10),
+                            Text(
+                              '+387 259 19203',
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: 45,
+                      margin: EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.only(left: 10.0),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.calendar_month_outlined,
+                              color: Colors.white,
+                              size: 24.0,
+                            ),
+                            SizedBox(width: 10),
+                            Text(
+                              'dummyData@gmail.com',
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ],
                 ),
