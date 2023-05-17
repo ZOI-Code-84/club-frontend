@@ -1,36 +1,55 @@
-import 'package:clubspace/homepage/homepage_screen.dart';
+import 'package:clubspace/login/login.dart';
 import 'package:flutter/material.dart';
-import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
+import 'package:lottie/lottie.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+void main() => runApp(Splash());
 
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
+class Splash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: FlutterSplashScreen.scale(
-        gradient: const LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Colors.lightBlueAccent,
-            Colors.blue,
-          ],
+      home: SplashScreen(),
+    );
+  }
+}
+
+class SplashScreen extends StatefulWidget {
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _loadSplashAnimation();
+  }
+
+  Future<void> _loadSplashAnimation() async {
+    await Future.delayed(Duration(seconds: 5));
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => LoginScreen()),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.lightBlueAccent,
+      body: Center(
+        child: Lottie.network(
+          'https://assets5.lottiefiles.com/packages/lf20_sr6nrr2j.json',
+          width: 200,
+          height: 200,
+          repeat: true,
+          fit: BoxFit.contain,
+          onLoaded: (composition) {},
         ),
-        childWidget: SizedBox(
-          height: 50,
-          child: Image.asset("assets/saturn.png"),
-        ),
-        duration: const Duration(milliseconds: 2000),
-        animationDuration: const Duration(milliseconds: 1000),
-        defaultNextScreen: const HomePage(),
       ),
     );
   }
 }
+
