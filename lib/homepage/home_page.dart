@@ -4,6 +4,11 @@ import 'package:flutter/material.dart';
 void main() => runApp(HomePage());
 
 class HomePage extends StatelessWidget {
+
+  final String? username;
+
+  HomePage({this.username});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,7 +18,7 @@ class HomePage extends StatelessWidget {
         colorScheme:
             ColorScheme.fromSwatch().copyWith(secondary: Color(0xFFFFEAD2)),
       ),
-      home: DrawerDesign(),
+      home: DrawerDesign(username: username),
       routes: {
         '/page1': (context) => Page1(),
         '/page2': (context) => Page2(),
@@ -25,99 +30,101 @@ class HomePage extends StatelessWidget {
 }
 
 class DrawerDesign extends StatelessWidget {
+  final String? username;
+
+  DrawerDesign({this.username});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          actions: [
-            IconButton(
-              onPressed: () {
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        actions: [
+          IconButton(
+            onPressed: () {
               //=> user profile
-              },
-              icon: Image.network(
-                'https://user-images.githubusercontent.com/76163793/238213673-8d146dfe-a095-4846-8533-76cbec0c3cae.png',
-                width: 24,
-                height: 24,
+            },
+            icon: Image.network(
+              'https://user-images.githubusercontent.com/76163793/238213673-8d146dfe-a095-4846-8533-76cbec0c3cae.png',
+              width: 24,
+              height: 24,
+            ),
+          ),
+        ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(
+                      'https://user-images.githubusercontent.com/76163793/238204789-366ab0d1-de84-4642-ab3f-25672f3205b8.png'),
+                  fit: BoxFit.cover,
+                ),
               ),
+              child: Stack(
+                children: [
+                  Positioned(
+                    bottom: 0,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        CircleAvatar(
+                          radius: 40.0,
+                          backgroundImage: NetworkImage(
+                              'https://avatars.githubusercontent.com/u/76163793?s=400&u=b008cb3721c90249cea73751922902b365775e7b&v=4'),
+                        ),
+                        SizedBox(height: 10.0),
+                        Text(
+                          username ?? 'Guest',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text('User Profile'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/page1');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.signpost_outlined),
+              title: Text('Club posts'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/page2');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/page3');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.exit_to_app),
+              title: Text('Logout'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/page3');
+              },
             ),
           ],
         ),
-        drawer: Drawer(
-          child: ListView(
-            children: <Widget>[
-              DrawerHeader(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(
-                        'https://user-images.githubusercontent.com/76163793/238204789-366ab0d1-de84-4642-ab3f-25672f3205b8.png'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                child: Stack(
-                  children: [
-                    Positioned(
-                      bottom: 0,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          CircleAvatar(
-                            radius: 40.0,
-                            backgroundImage: NetworkImage(
-                                'https://avatars.githubusercontent.com/u/76163793?s=400&u=b008cb3721c90249cea73751922902b365775e7b&v=4'),
-                          ),
-                          SizedBox(height: 10.0),
-                          Text(
-                            'Nihad Jusovic',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              ListTile(
-                leading: Icon(Icons.person),
-                title: Text('User Profile'),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/page1');
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.signpost_outlined),
-                title: Text('Club posts'),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/page2');
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.settings),
-                title: Text('Settings'),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/page3');
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.exit_to_app),
-                title: Text('Logout'),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/page3');
-                },
-              ),
-            ],
-          ),
-        ),
+      ),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -139,10 +146,10 @@ class DrawerDesign extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Welcome user',
+                    username ?? 'Guest',
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
+                      color: Colors.white,
+                      fontSize: 18.0,
                     ),
                   ),
                 ),
@@ -341,8 +348,7 @@ class DrawerDesign extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 }
 

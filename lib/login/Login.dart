@@ -12,39 +12,53 @@ String? authToken;
 class LoginScreen extends StatelessWidget {
   Duration get loginTime => Duration(milliseconds: 2250);
 
+  String? username;
+
   Future<String?> _authUser(LoginData data) async {
     debugPrint('Name: ${data.name}, Password: ${data.password}');
 
     final response = await http.post(
-      Uri.parse('http://192.168.56.1:8080/api/auth/login'),
-      body: jsonEncode(<String, String>{
-        "email": data.name,
-        "password": data.password
-      }),
-      encoding: Utf8Codec(),
-      headers: <String, String>{
+      Uri.parse('http://192.168.0.15:8080/api/auth/login'),
+      headers: {
         'Content-Type': 'application/json; charset=UTF-8',
-        'Accept': "*/*",
+        'Accept': '*/*',
         'connection': 'keep-alive',
       },
+      body: jsonEncode({
+        'email': data.name,
+        'password': data.password,
+      }),
     );
 
-    print(response.body);
+    print('Response: ${response.body}');
 
     if (response.statusCode == 200) {
-      final responseBody = jsonDecode(response.body);
-      final token = responseBody['token'] as String?;
+      if (response.body.isNotEmpty) {
+        try {
+          final Map<String, dynamic> responseBody = json.decode(response.body);
 
-      authToken = token;
+          if (responseBody.containsKey('token')) {
+            final String? token = responseBody['token'] as String?;
 
-      return null;
+            if (token != null) {
+              authToken = token;
+              username = data.name;
+              return null;
+            }
+          }
+
+          return 'Token not found in response';
+        } catch (e) {
+          print('Error decoding JSON response: $e');
+          return 'Error decoding JSON response';
+        }
+      } else {
+        return 'Empty response body';
+      }
     } else {
       return 'Invalid credentials';
     }
   }
-
-
-
 
   Future<String?> _signupUser(SignupData data) async {
     debugPrint('Signup Name: ${data.name}, Password: ${data.password}');
@@ -80,47 +94,54 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: Colors.white,
-        body: FlutterLogin(
-          theme: LoginTheme(
-            primaryColor: Colors.blueAccent,
-            buttonTheme: LoginButtonTheme(
-              backgroundColor: Colors.deepPurpleAccent,
-
+      home: Navigator(
+        onGenerateRoute: (settings) {
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (context) => Scaffold(
+              backgroundColor: Colors.white,
+              body: FlutterLogin(
+                theme: LoginTheme(
+                  primaryColor: Colors.blueAccent,
+                  buttonTheme: LoginButtonTheme(
+                    backgroundColor: Colors.deepPurpleAccent,
+                  ),
+                ),
+                logo: AssetImage('assets/saturn.png'),
+                onLogin: _authUser,
+                onSignup: _signupUser,
+                loginProviders: <LoginProvider>[
+                  LoginProvider(
+                    icon: FontAwesomeIcons.google,
+                    callback: () async {
+                      debugPrint('start google sign in');
+                      await Future.delayed(loginTime);
+                      debugPrint('stop google sign in');
+                      return null;
+                    },
+                  ),
+                  LoginProvider(
+                    icon: FontAwesomeIcons.phone,
+                    callback: () async {
+                      debugPrint('start phone sign in');
+                      await Future.delayed(loginTime);
+                      debugPrint('stop phone sign in');
+                      return null;
+                    },
+                  ),
+                ],
+                onSubmitAnimationCompleted: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => HomePage(username: username),
+                    ),
+                  );
+                },
+                onRecoverPassword: _recoverPassword,
+              ),
             ),
-          ),
-          logo: AssetImage('assets/saturn.png'),
-          onLogin: _authUser,
-          onSignup: _signupUser,
-
-          loginProviders: <LoginProvider>[
-            LoginProvider(
-              icon: FontAwesomeIcons.google,
-              callback: () async {
-                debugPrint('start google sign in');
-                await Future.delayed(loginTime);
-                debugPrint('stop google sign in');
-                return null;
-              },
-            ),
-            LoginProvider(
-              icon: FontAwesomeIcons.phone,
-              callback: () async {
-                debugPrint('start phone sign in');
-                await Future.delayed(loginTime);
-                debugPrint('stop phone sign in');
-                return null;
-              },
-            ),
-          ],
-          onSubmitAnimationCompleted: () {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (context) => HomePage(),
-            ));
-          },
-          onRecoverPassword: _recoverPassword,
-        ),
+          );
+        },
       ),
     );
   }

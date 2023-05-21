@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+void main() => runApp(RegisterScreen());
+
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({Key? key}) : super(key: key);
   @override
