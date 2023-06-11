@@ -1,254 +1,213 @@
 import 'package:flutter/material.dart';
 
-const double kSpacingUnit = 16.0;
+void main() => runApp(ProfilePage(
+  clubStatus: 'doeJ-100',
+  memberSince: '2022-01-01',
+  contactDetails: 'john.doe@example.com',
+));
 
-void main() => runApp(Demo());
+class ProfilePage extends StatefulWidget {
+  final String? username;
+  final String? clubStatus;
+  final String? memberSince;
+  final String? contactDetails;
 
-class Demo extends StatelessWidget {
-  const Demo({super.key});
+  ProfilePage({
+    this.username,
+    this.clubStatus,
+    this.memberSince,
+    this.contactDetails,
+  });
+
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  bool _isEditing = false;
+  TextEditingController _clubStatusController = TextEditingController();
+  TextEditingController _memberSinceController = TextEditingController();
+  TextEditingController _contactDetailsController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _clubStatusController.text = widget.clubStatus ?? '';
+    _memberSinceController.text = widget.memberSince ?? '';
+    _contactDetailsController.text = widget.contactDetails ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
-    final Color hexColor = Color.fromARGB(255, 2, 2, 1);
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Stack(
-          children: <Widget>[
-            Container(
-              width: 360,
-              height: 300,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(30),
-                ),
-                image: DecorationImage(
-                  image: AssetImage("assets/background_image.png"),
-                  fit: BoxFit.cover,
-                  alignment: Alignment.bottomLeft,
-                ),
-              ),
-            ),
-            Positioned(
-              top: kSpacingUnit * 4,
-              width: 360,
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: Column(
-                  children: [
-                    CircleAvatar(
-                      radius: kSpacingUnit * 2,
-                      backgroundImage: AssetImage("assets/avatar.jpg"),
-                    ),
-                    SizedBox(height: 20),
-                    Text(
-                      'Faruk Kadic',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    SizedBox(height: 40),
-                    ElevatedButton(
-                      onPressed: () {
-                        print('Edited');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFFF6BA71),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(40.0),
-                        ),
-                      ),
+        appBar: AppBar(
+          title: Text('Profile'),
+        ),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 50.0),
                       child: Container(
                         width: 120,
-                        height: 50,
-                        child: const Center(
-                          child: Text(
-                            'Edit Profile',
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                        height: 120,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.grey,
+                        ),
+                        child: Icon(
+                          Icons.person,
+                          size: 80,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 16.0),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Text(
+                      'Username: ${widget.username ?? 'Guest'}',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 16.0),
+                  _isEditing
+                      ? Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: TextField(
+                      controller: _clubStatusController,
+                      decoration: InputDecoration(
+                        labelText: 'Club username',
+                        icon: Icon(Icons.star),
+                      ),
+                    ),
+                  )
+                      : Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Row(
+                      children: [
+                        Icon(Icons.star),
+                        SizedBox(width: 8.0),
+                        Text(
+                          'Club Username: ${_clubStatusController.text}',
+                          style: TextStyle(fontSize: 18.0),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 16.0),
+                  _isEditing
+                      ? Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: TextField(
+                      controller: _memberSinceController,
+                      decoration: InputDecoration(
+                        labelText: 'Member Since',
+                        icon: Icon(Icons.calendar_today),
+                      ),
+                    ),
+                  )
+                      : Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Row(
+                      children: [
+                        Icon(Icons.calendar_today),
+                        SizedBox(width: 8.0),
+                        Text(
+                          'Member Since: ${_memberSinceController.text}',
+                          style: TextStyle(fontSize: 18.0),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 16.0),
+                  _isEditing
+                      ? Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: TextField(
+                      controller: _contactDetailsController,
+                      decoration: InputDecoration(
+                        labelText: 'Contact Details',
+                        icon: Icon(Icons.email),
+                      ),
+                    ),
+                  )
+                      : Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Row(
+                      children: [
+                        Icon(Icons.email),
+                        SizedBox(width: 8.0),
+                        Text(
+                          'Contact Details: ${_contactDetailsController.text}',
+                          style: TextStyle(fontSize: 18.0),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 16.0),
+                  _isEditing
+                      ? Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Container(
+                        width: 200.0,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              _isEditing = false;
+                            });
+                          },
+                          child: Text('Save'),
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 24.0,
+                              vertical: 12.0,
                             ),
+                            textStyle: TextStyle(fontSize: 18.0),
                           ),
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  )
+                      : Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Container(
+                        width: 200.0,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              _isEditing = true;
+                            });
+                          },
+                          child: Text('Edit Profile'),
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 24.0,
+                              vertical: 12.0,
+                            ),
+                            textStyle: TextStyle(fontSize: 18.0),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: IconButton(
-                padding: EdgeInsets.only(top: 20),
-                color: Colors.white,
-                onPressed: () {},
-                icon: Icon(Icons.arrow_back),
-              ),
-            ),
-            Align(
-              alignment: Alignment.topRight,
-              child: IconButton(
-                padding: EdgeInsets.only(top: 20),
-                color: Colors.white,
-                onPressed: () {},
-                icon: Icon(Icons.settings),
-              ),
-            ),
-            Positioned(
-              top: kSpacingUnit * 21,
-              width: 360,
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: Column(
-                  children: [
-                    Container(
-                      height: 45,
-                      margin: EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      child:  Padding(
-                        padding: EdgeInsets.only(left: 10.0),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.person,
-                              color: Colors.white,
-                              size: 24.0,
-                            ),
-                            SizedBox(width: 10),
-                            Text(
-                              'Player',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      margin: EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      child:  Padding(
-                        padding: EdgeInsets.only(left: 10.0),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.people,
-                              color: Colors.white,
-                              size: 24.0,
-                            ),
-                            SizedBox(width: 10),
-                            Text(
-                              'Point Guard',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      margin: EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      child:  Padding(
-                        padding: EdgeInsets.only(left: 10.0),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.mail_outline_outlined,
-                              color: Colors.white,
-                              size: 24.0,
-                            ),
-                            SizedBox(width: 10),
-                            Text(
-                              'dummyData@gmail.com',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      margin: EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      child:  Padding(
-                        padding: EdgeInsets.only(left: 10.0),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.phone,
-                              color: Colors.white,
-                              size: 24.0,
-                            ),
-                            SizedBox(width: 10),
-                            Text(
-                              '+387 259 19203',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      margin: EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      child:  Padding(
-                        padding: EdgeInsets.only(left: 10.0),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.calendar_month_outlined,
-                              color: Colors.white,
-                              size: 24.0,
-                            ),
-                            SizedBox(width: 10),
-                            Text(
-                              'dummyData@gmail.com',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
